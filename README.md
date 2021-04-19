@@ -10,7 +10,7 @@ client-sdk-python is a python sdk serving the Platon underlying chain. Interact 
 
 The main functions are used to obtain block data, send transactions, interact with smart contracts, and other applications.
 
-[client-sdk-python download link](https://github.com/PlatONnetwork/client-sdk-python)
+[client-sdk-python download link](https://github.com/AlayaNetwork/client-sdk-python)
 
 ## Quick start
 
@@ -27,7 +27,7 @@ The main functions are used to obtain block data, send transactions, interact wi
 
  Or download the code and use it in the python editor. git bash pull the source code, the following operations
 
-    git clone -b 0.15.1-develop https://github.com/PlatONnetwork/client-sdk-python.git
+    git clone -b 0.15.1-develop https://github.com/AlayaNetwork/client-sdk-python.git
 
 > Where `0.15.1-develop` is the currently used branch.
 
