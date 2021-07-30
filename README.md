@@ -7,7 +7,7 @@
 
 ## Description
 
-client-sdk-python is a python sdk serving the Platon underlying chain. Interact with the underlying chain through the web3 object. At the bottom level, it communicates with local nodes through RPC calls. client-sdk-python can connect to any PlatON node that exposes the RPC interface.
+client-sdk-python is a python sdk serving the Alaya underlying chain. Interact with the underlying chain through the web3 object. At the bottom level, it communicates with local nodes through RPC calls. client-sdk-python can connect to any Alaya node that exposes the RPC interface.
 
 The main functions are used to obtain block data, send transactions, interact with smart contracts, and other applications.
 
@@ -36,19 +36,17 @@ The main functions are used to obtain block data, send transactions, interact wi
 
  Or download the code and use it in the python editor. git bash pull the source code, the following operations
 
-    git clone -b 0.15.1-develop https://github.com/AlayaNetwork/client-sdk-python.git
-
-> Where `0.15.1-develop` is the currently used branch.
+    git clone https://github.com/AlayaNetwork/client-sdk-python.git
 
 ### Second part: use
 
 #### **1** Web3 mode
 
- Communication between Platon nodes through P2PMessage. The built-in Web3 mode is used between the node and the python sdk to send JSON-RPC requests, and connect to the node through HTTP, websocket, IPC and other methods.
+ Communication between Alaya nodes through P2PMessage. The built-in Web3 mode is used between the node and the python sdk to send JSON-RPC requests, and connect to the node through HTTP, websocket, IPC and other methods.
 
 #### **2** Node connection
 
-- Take HTTP connection as an example, connect to a Platon node
+- Take HTTP connection as an example, connect to a Alaya node
 
   ```python
   w3 = Web3(HTTPProvider("http://localhost:6789"),chain_id = 100)
@@ -56,7 +54,7 @@ The main functions are used to obtain block data, send transactions, interact wi
   print(w3.isConnected())
   ```
 
-  Where localhost:6789 is a node Url of Platon, please enter the Url of the accessible Platon node.
+  Where localhost:6789 is a node Url of Alaya, please enter the Url of the accessible Alaya node.
 
   platon is an instance of the platON class.
 
@@ -75,7 +73,7 @@ The main functions are used to obtain block data, send transactions, interact wi
   code show as below:
 
   ```python
-  w3 = Web3(IPCProvider("./platon.ipc"),chain_id = 100)
+  w3 = Web3(IPCProvider("./data/platon.ipc"),chain_id = 100)
   platon = PlatON(w3)
   print(w3.isConnected())
   ```
@@ -210,7 +208,7 @@ The main functions are used to obtain block data, send transactions, interact wi
 
 #### **4** On-chain query api
 
-After successfully connecting with the nodes on the Platon chain, you can query the relevant information of the nodes on the chain through the api in platon
+After successfully connecting with the nodes on the Alaya chain, you can query the relevant information of the nodes on the chain through the api in Alaya
 
 ##### (1) platon.blockNumber
 
@@ -458,7 +456,7 @@ platon.getTransaction(transactionHash)
 
 - `transactionHash`: String-the hash value of the transaction
 
-​    
+    
 
   return value:
 
@@ -530,7 +528,7 @@ platon.getTransaction(transactionHash)
 
 ##### (1) sendTransaction(transactionObject)
 
-  Submit a transaction to the platon chain (transaction that has been signed by the node and has not yet been submitted)
+  Submit a transaction to the Alaya chain (transaction that has been signed by the node and has not yet been submitted)
 
   parameter:
 
@@ -800,7 +798,7 @@ platon.sendRawTransaction(signTransaction, private-key)
   - Dictionary data, create a filter to notify when the client receives a matching whisper message.
 
 
-​    
+    
 
   ```python
   >>> platon.filter('latest')
@@ -894,7 +892,7 @@ True
 - fromBlock-Number|String: The number of the earliest block ("latest" may be given to mean the most recent and "pending" currently mining, block). By default "latest".    
 - toBlock-Number|String: The number of the latest block ("latest" may be given to mean the most recent and "pending" currently mining, block). By default "latest".    
 - address-String|Array: An address or a list of addresses to only get logs from particular account(s).
-- topics-Array: An array of values ​​which must each appear in the log entries. The order is important, if you want to leave topics out use null, eg [null, '0x12...']. You can also pass an array for each topic with options for that topic eg [null, ['option1','option2']]
+- topics-Array: An array of values which must each appear in the log entries. The order is important, if you want to leave topics out use null, eg [null, '0x12...']. You can also pass an array for each topic with options for that topic eg [null, ['option1','option2']]
 
   return value:
 
@@ -937,7 +935,7 @@ True
   - gas-Number (optional): The maximum gas provided for this call “transaction” (gas limit).
 
 
-​      
+      
 
 ##### (7) call()
 
@@ -1054,7 +1052,7 @@ print(platon.getAddressHrp)
 
 The PlatON blockchain supports smart contracts (evm) created using the solidity language, and it also supports WebAssembly (WASM) to execute smart contracts written by users. Among them, WASM is a binary instruction set designed for stack virtual machines. WASM is designed to be available for platform compilation targets like C/C++/Rust and other high-level languages. The original design purpose is to solve the performance problem of JavaScript. WASM is a Web standard that is being promoted by W3C and is supported by browser vendors such as Google, Microsoft, and Mozilla.
 
-For details on the introduction, creation, and compilation of evm and wasm contracts, please refer to [Platon Smart Contract](https://devdocs.platon.network/docs/zh-CN/WASM_Smart_Contract/)
+For details on the introduction, creation, and compilation of evm and wasm contracts, please refer to [Alaya Smart Contract](https://alaya.network/alaya-devdocs/zh-CN/Wasm_Getting_started)
 
 
 
@@ -1062,18 +1060,18 @@ For details on the introduction, creation, and compilation of evm and wasm contr
 
 The python sdk currently supports bin and abi formed after the evm and wasm contracts are compiled as contract data to interact with the PlatON blockchain.
 
-**(1)** The evm contract (created in solidity language) can be compiled, deployed, and invoked using platon-truffle. For details, please refer to [solidity compiler](https://github.com/AlayaNetwork/solidity) and [platon-truffle](https://platon-truffle.readthedocs.io/en/v0.13.1/getting-started/ installation.html)
-**(2)** The wasm contract (created in C/C++/Rust and other languages) can be compiled, deployed, and invoked using PlatON-CDT or platon-truffle. For details, please refer to [PlatON-CDT Compiler](https://github.com/AlayaNetwork/PlatON-CDT/tree/feature/wasm)
+**(1)** The evm contract (created in solidity language) can be compiled, deployed, and invoked using alaya-truffle. For details, please refer to [solidity compiler](https://github.com/AlayaNetwork/solidity) and [alaya-truffle](https://platon-truffle.readthedocs.io/en/v0.13.1/getting-started/ installation.html)
+**(2)** The wasm contract (created in C/C++/Rust and other languages) can be compiled, deployed, and invoked using PlatON-CDT or alaya-truffle. For details, please refer to [PlatON-CDT Compiler](https://github.com/AlayaNetwork/PlatON-CDT/tree/feature/wasm)
 
 
 
 #### 3. SDK calls to evm contract
 
-##### (1) Use platon-truffle to compile the evm contract locally
+##### (1) Use Alaya-truffle to compile the evm contract locally
 
   Obtain bin and abi. Take the Helloworld contract as an example.
 
- After using platon-truffle to compile Helloworld.sol, get the abi and bytecode (bin) in the generated build/contracts/HelloWorld.json.
+ After using Alaya-truffle to compile Helloworld.sol, get the abi and bytecode (bin) in the generated build/contracts/HelloWorld.json.
 
 ##### (2) Deploy Helloworld contract through python SDK
 
@@ -1108,9 +1106,9 @@ The python sdk currently supports bin and abi formed after the evm and wasm cont
   lax1yjjzvjph3tw4h2quw6mse25y492xy7fzwdtqja
   ```
 
-  ​ Then use the function contract_deploy(bytecode, fromAddress) to deploy the evm contract on the nodes of the PlatON blockchain by sending transactions, and return the transaction hash transactionHash.
+   Then use the function contract_deploy(bytecode, fromAddress) to deploy the evm contract on the nodes of the PlatON blockchain by sending transactions, and return the transaction hash transactionHash.
 
-  ​ tx_receipt is the deployment receipt obtained after platon.waitForTransactionReceipt parses the transactionHash (deployment is also a transaction, and the transaction obtains the transaction receipt through platon.waitForTransactionReceipt).
+   tx_receipt is the deployment receipt obtained after platon.waitForTransactionReceipt parses the transactionHash (deployment is also a transaction, and the transaction obtains the transaction receipt through platon.waitForTransactionReceipt).
 
   ```python
   def contract_deploy(bytecode, fromAddress):
@@ -1178,9 +1176,9 @@ The python sdk currently supports bin and abi formed after the evm and wasm cont
 
   Contains: Sign transaction platon.account.signTransaction (signature with private key)
 
-  ​ Send transaction platon.sendRawTransaction
+   Send transaction platon.sendRawTransaction
 
-  ​ Get transaction receipt platon.waitForTransactionReceipt
+   Get transaction receipt platon.waitForTransactionReceipt
 
   ```python
   send_privatekey = "b7a7372e78160f71a1a75e03c4aa72705806a05cf14ef39c87fdee93d108588c"
@@ -1291,7 +1289,7 @@ print(topic_param)
 
   The second line calls the event MyEvent() to get the transaction log information.
 
-  Among the values ​​corresponding to'args':
+  Among the values corresponding to'args':
 
   '_var' is the only parameter value
 
@@ -1378,11 +1376,11 @@ AttributeDict ({ 'blockHash': HexBytes ( '0x7a193be2cf86aedcf844c0478c6f64d226af
 
 ##### (3) Send transaction to Helloworld contract (wasm contract)
 
-  ​ Based on the successful deployment of the previous contract, call the method in the contract.
+   Based on the successful deployment of the previous contract, call the method in the contract.
 
-  ​ payable is an instance after the contract is successfully deployed
+   payable is an instance after the contract is successfully deployed
 
-  ​ By calling the function setBool, the parameter false is sent to the chain (send transaction)
+   By calling the function setBool, the parameter false is sent to the chain (send transaction)
 
   ```python
   payable = platon.wasmcontract(address=tx_receipt.contractAddress, abi=cabi,vmtype=1)
@@ -1443,9 +1441,9 @@ print(topic_param)
 (AttributeDict(('args': AttributeDict(('topic1':'topic1','arg1':'data1','arg2': 1000,'arg3': 1000}),'event':'setUint32Evt', ' logIndex ': 0,' transactionIndex ': 0,' transactionHash ': HexBytes (' 0xabac50c6a9d443d9f89065775f0f3d56ddeabd2f2a5e0e1f36d00db703b14d8b '),' address': 'lax1sgsp74pce2vkgwqjd3rzmt55p70psmq7qvnqwn', 'blockHash': HexBytes ( '0x78f15fbacbc745dfd5b35b596d28b61ae2987b6ff9050dc39c716f383e505899'), 'blockNumber': 1477774}),)
   ```
 
-  Among the values ​​​​corresponding to'args':
+  Among the values corresponding to'args':
 
-  'topic1' is the topic value,'arg1','arg2', and'arg3' are the three parameter values ​​defined in the event.
+  'topic1' is the topic value,'arg1','arg2', and'arg3' are the three parameter values defined in the event.
 
 
 
